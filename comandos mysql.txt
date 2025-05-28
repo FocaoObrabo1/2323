@@ -1,0 +1,78 @@
+
+CREATE DATABASE IF NOT EXISTS loja_virtual;
+USE loja_virtual;
+
+
+CREATE TABLE IF NOT EXISTS categorias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS produtos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
+    categoria_id INT NOT NULL,
+    caminho_imagem VARCHAR(255),
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS vendas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    data_venda DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS vendas_itens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    venda_id INT NOT NULL,
+    produto_id INT NOT NULL,
+    quantidade INT NOT NULL,
+    FOREIGN KEY (venda_id) REFERENCES vendas(id),
+    FOREIGN KEY (produto_id) REFERENCES produtos(id)
+);
+
+
+INSERT INTO categorias (nome) VALUES
+('headset'),
+('mouse'),
+('teclado'),
+('placa de video'),
+('ssd'),
+('hd');
+
+
+INSERT INTO produtos (nome, preco, categoria_id, caminho_imagem) VALUES
+('Headset Gamer HyperX Cloud II', 399.90, 1,'68365e2721e9b.png'),
+('Headset Logitech G Pro X', 499.90, 1,'68365e4411794.png'),
+('Headset Razer Kraken X', 299.90, 1,'68365e60d060c.png');
+
+
+INSERT INTO produtos (nome, preco, categoria_id, caminho_imagem) VALUES
+('Mouse Logitech G502 HERO', 299.90, 2, '68365ea587601.png'),
+('Mouse Razer DeathAdder V2', 349.90, 2, '68365ec67e150.png'),
+('Mouse Corsair M65 RGB Elite', 329.90, 2, '68365e868e08a.png');
+
+
+INSERT INTO produtos (nome, preco, categoria_id, caminho_imagem) VALUES
+('Teclado Mecânico Redragon Kumara', 249.90, 3, '68365fc2bd1df.png'),
+('Teclado Corsair K70 RGB', 799.90, 3, '68365f889ce2d.png'),
+('Teclado Logitech G213', 299.90, 3, '68365fa834eed.png');
+
+
+INSERT INTO produtos (nome, preco, categoria_id, caminho_imagem) VALUES
+('NVIDIA GeForce RTX 3060', 2799.90, 4, '68365f10c7896.png' ),
+('AMD Radeon RX 6600 XT', 2599.90, 4, '68365da07dcbc.png'),
+('NVIDIA GeForce GTX 1660 Super', 1899.90, 4, '68365ee622558.png');
+
+
+INSERT INTO produtos (nome, preco, categoria_id, caminho_imagem) VALUES
+('SSD Samsung 970 EVO 500GB', 449.90, 5, '68365f4d6be12.png'),
+('SSD Western Digital Blue 1TB', 599.90, 5, '68365f30c1d22.png'),
+('SSD Crucial MX500 1TB', 579.90, 5,'68365f66c6249.png' );
+
+
+INSERT INTO produtos (nome, preco, categoria_id, caminho_imagem) VALUES
+('HD Seagate BarraCuda 2TB', 349.90, 6, '68365dc06b6e6.png'),
+('HD Western Digital Blue 1TB', 299.90, 6, '68365f30c1d22.png'),
+('HD Toshiba P300 3TB', 399.90, 6, '68365de01c1a4.png');
